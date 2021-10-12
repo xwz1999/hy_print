@@ -75,10 +75,17 @@ class _HomeState extends State<Home> {
           TextButton(
               onPressed: () async {
                 await HyPrinter.printAsOrder(
-                    'ASSZ202112120001', '', "欧洲特快", '法国', "2/10");
+                    'ASSZ202112120001', '', "", '', "2/10");
                 setState(() {});
               },
-              child: const Text('打印')),
+              child: const Text('打印非FBA面单')),
+          TextButton(
+              onPressed: () async {
+                await HyPrinter.printAsOrder('ASSZ202112120001',
+                    'FBA15RY33MN8U00001', "欧洲特快", '法国', "2/10");
+                setState(() {});
+              },
+              child: const Text('打印FBA面单')),
           TextButton(
               onPressed: () async {
                 await HyPrinter.printBarCode(0, 0, "2", "1", "130", "45", "26",
