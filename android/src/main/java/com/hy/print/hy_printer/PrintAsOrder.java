@@ -76,7 +76,7 @@ public class PrintAsOrder {
             PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, "2", "1", "130", "0", "26", false, "", "", "", code);
             PrinterHelper.Align(PrinterHelper.LEFT);
             PrinterHelper.SetBold("3");
-            PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "150", 500, 4, code);
+            PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "170", 500, 4, code);
             closeBold();
             fbaCode = "FBA号：" + fbaCode;
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "222", 500, 8, fbaCode);
