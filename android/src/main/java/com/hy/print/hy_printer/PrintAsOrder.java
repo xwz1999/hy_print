@@ -19,6 +19,19 @@ public class PrintAsOrder {
         }
     }
 
+    private static void printBarCode(String code) {
+
+        String width = "2";
+        if (code.length() > 20) {
+            width = "1";
+        }
+        try {
+            PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, width, "1", "130", "10", "26", false, "", "", "", code);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static int print(String code, String fbaCode, String country, String channel, String count, Boolean hasPlan) {
         int re = 0;
         if (!hasPlan) {
@@ -34,9 +47,9 @@ public class PrintAsOrder {
         int reusult = 0;
         System.out.println("print start");
         try {
-            PrinterHelper.printAreaSize("0", "200", "200", "400", "1");
+            PrinterHelper.printAreaSize("0", "203", "200", "400", "1");
             PrinterHelper.Align(PrinterHelper.CENTER);
-            PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, "2", "1", "130", "0", "26", false, "", "", "", code);
+            printBarCode(code);
             PrinterHelper.Align(PrinterHelper.LEFT);
             PrinterHelper.SetBold("3");
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "170", 500, 4, code);
@@ -70,7 +83,7 @@ public class PrintAsOrder {
         try {
             PrinterHelper.printAreaSize("0", "200", "200", "400", "1");
             PrinterHelper.Align(PrinterHelper.CENTER);
-            PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, "2", "1", "130", "0", "26", false, "", "", "", code);
+            printBarCode(code);
             PrinterHelper.Align(PrinterHelper.LEFT);
             PrinterHelper.SetBold("3");
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "170", 500, 4, code);
