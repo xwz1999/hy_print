@@ -22,7 +22,7 @@ public class PrintAsOrder {
     private static void printBarCode(String code) {
 
         String width = "2";
-        if (code.length() > 20) {
+        if (code.length() > 18) {
             width = "1";
         }
         try {

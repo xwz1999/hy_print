@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
           TextButton(
               onPressed: () async {
                 await HyPrinter.printAsOrder(
-                    code: 'ASNB202112120001',
+                    code: 'ASASNB2021121200011',
                     fbaCode: '',
                     channel: "",
                     country: '',
