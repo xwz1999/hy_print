@@ -1,7 +1,5 @@
 package com.hy.print.hy_printer;
 
-import android.content.Context;
-
 import cpcl.PrinterHelper;
 
 public class PrintAsOrder {
@@ -21,19 +19,18 @@ public class PrintAsOrder {
         }
     }
 
-    public static int print(String code, String fbaCode, String country, String channel, String count) {
+    public static int print(String code, String fbaCode, String country, String channel, String count, Boolean hasPlan) {
         int re = 0;
-        if (fbaCode.isEmpty()) {
-            re = printNoFba(code, count);
+        if (!hasPlan) {
+            re = printNoPlan(code, count);
         } else {
-            re = printFba(code, fbaCode, country, channel, count);
+            re = printHasPlan(code, fbaCode, country, channel, count);
         }
         return re;
     }
 
-    ;
 
-    public static int printNoFba(String code, String count) {
+    public static int printNoPlan(String code, String count) {
         int reusult = 0;
         System.out.println("print start");
         try {
@@ -47,14 +44,14 @@ public class PrintAsOrder {
 
             PrinterHelper.Line("42", "228", "550", "228", "2");
             setBold();
-            PrinterHelper.SetMag("2","2");
+            PrinterHelper.SetMag("2", "2");
             PrinterHelper.Text(PrinterHelper.TEXT, "20", "0", "45", "254", "未建计划");
 
             PrinterHelper.Align(PrinterHelper.RIGHT);
             PrinterHelper.Text(PrinterHelper.TEXT, "20", "0", "42", "254", "件数");
 
             PrinterHelper.Text(PrinterHelper.TEXT, "20", "0", "42", "300", count);
-            PrinterHelper.SetMag("1","1");
+            PrinterHelper.SetMag("1", "1");
             closeBold();
             PrinterHelper.Align(PrinterHelper.LEFT);
             PrinterHelper.Form();
@@ -67,7 +64,7 @@ public class PrintAsOrder {
         return reusult;
     }
 
-    public static int printFba(String code, String fbaCode, String country, String channel, String count) {
+    public static int printHasPlan(String code, String fbaCode, String country, String channel, String count) {
         int reusult = 0;
         System.out.println("print start");
         try {
@@ -78,7 +75,11 @@ public class PrintAsOrder {
             PrinterHelper.SetBold("3");
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "170", 500, 4, code);
             closeBold();
-            fbaCode = "FBA号：" + fbaCode;
+            if (fbaCode.isEmpty()) {
+                fbaCode = "非BFA订单";
+            } else {
+                fbaCode = "FBA号：" + fbaCode;
+            }
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "222", 500, 8, fbaCode);
             PrinterHelper.Line("42", "269", "550", "269", "2");
             setBold();

@@ -25,6 +25,11 @@ class HyPrinter {
     return devices;
   }
 
+  static Future<bool> blutIsOn() async {
+    var result = await flutterBlue.isOn;
+    return result;
+  }
+
   ///0：连接成功
   ///-1：连接超时
   ///-2：地址格式错误
@@ -106,14 +111,26 @@ class HyPrinter {
     return result;
   }
 
-  static Future<int> printAsOrder(String code, String fbaCode, String channel,
-      String country, String count) async {
+  ///      'code': code,  箱号
+  //       'fbaCode': fbaCode, fba号/非fba传空字符串
+  //       'channel': channel,渠道名称
+  //       'country': country,目的国
+  //       'count': count,货件数量
+  //       'hasPlan':hasPlan 有无计划
+  static Future<int> printAsOrder(
+      {required String code,
+      required String fbaCode,
+      required String channel,
+      required String country,
+      required String count,
+      required bool hasPlan}) async {
     int result = await _channel.invokeMethod('printAsOrder', {
       'code': code,
       'fbaCode': fbaCode,
       'channel': channel,
       'country': country,
       'count': count,
+      'hasPlan': hasPlan
     });
     return result;
   }
