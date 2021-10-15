@@ -47,7 +47,7 @@ public class PrintAsOrder {
         int reusult = 0;
         System.out.println("print start");
         try {
-            PrinterHelper.printAreaSize("0", "203", "200", "400", "1");
+            PrinterHelper.printAreaSize("0", "200", "200", "400", "1");
             PrinterHelper.Align(PrinterHelper.CENTER);
             printBarCode(code);
             PrinterHelper.Align(PrinterHelper.LEFT);
