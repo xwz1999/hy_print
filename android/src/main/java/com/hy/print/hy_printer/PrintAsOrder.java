@@ -89,7 +89,7 @@ public class PrintAsOrder {
             PrinterHelper.AutCenter(PrinterHelper.TEXT, "45", "170", 500, 4, code);
             closeBold();
             if (fbaCode.isEmpty()) {
-                fbaCode = "非BFA订单";
+                fbaCode = "非FBA订单";
             } else {
                 fbaCode = "FBA号：" + fbaCode;
             }
