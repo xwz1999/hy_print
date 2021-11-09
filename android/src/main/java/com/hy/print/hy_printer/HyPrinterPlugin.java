@@ -56,7 +56,7 @@ public class HyPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             }
             result.success(status);
         } else if (call.method.equals("printAsOrder")) {
-            int re = PrintAsOrder.print(call.argument("code"), call.argument("fbaCode"), call.argument("country"), call.argument("channel"), call.argument("count"));
+            int re = PrintAsOrder.print(call.argument("code"), call.argument("fbaCode"), call.argument("country"), call.argument("channel"), call.argument("count"), call.argument("hasPlan"));
             result.success(re);
         } else if (call.method.equals("printBarCode")) {
             int re = -1;
