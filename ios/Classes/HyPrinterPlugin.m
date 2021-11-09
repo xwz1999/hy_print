@@ -10,11 +10,12 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+  if ([@"connect" isEqualToString:call.method]) {
+      int result;
   } else {
     result(FlutterMethodNotImplemented);
   }
 }
+
 
 @end

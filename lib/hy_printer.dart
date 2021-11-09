@@ -36,7 +36,11 @@ class HyPrinter {
   ///-3：打印机与sdk不匹配
   ///-4：连接失败
   static Future<int> connect(String address) async {
-    int result = await _channel.invokeMethod('connect', {'address': address});
+    int result = -4;
+    await Future.delayed(const Duration(milliseconds: 2000), () async {
+      result = await _channel.invokeMethod('connect', {'address': address});
+    });
+    // int result = await _channel.invokeMethod('connect', {'address': address});
     return result;
   }
 

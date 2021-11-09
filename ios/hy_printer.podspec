@@ -17,7 +17,12 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
-
+  s.summary 
+  # 第三方.a文件
+  s.vendored_libraries = 'Classes/**/*.a'
+  # 第三方framework
+  s.ios.vendored_frameworks='Frameworks/PrinterSDK.framework'
+  s.vendored_frameworks = 'PrinterSDK.framework'
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
 end
