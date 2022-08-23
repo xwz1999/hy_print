@@ -1,9 +1,11 @@
 class Device {
-  final String name;
-  final String address;
+  String name;
+  String address;
+  bool isPaired;
 
-  const Device({
+  Device({
     required this.name,
     required this.address,
+    required this.isPaired,
   });
 }
