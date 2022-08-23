@@ -6,7 +6,7 @@ import 'package:hy_printer/device.dart';
 import 'package:hy_printer/dj_printer.dart';
 import 'package:hy_printer/hy_printer.dart';
 import 'package:hy_printer_example/scan_page.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,22 +32,22 @@ class _MyAppState extends State<MyApp> {
   //   setState(() {});
   // }
   Future<void> initPlatformState() async {
-    var per = await Permission.bluetooth.isGranted;
-    if (!per) {
-      Permission.bluetooth.request();
-    }
-    var pers = await Permission.locationWhenInUse.isGranted;
-    if (!pers) {
-      Permission.locationWhenInUse.request();
-    }
-    var per1 = await Permission.bluetoothScan.isGranted;
-    if (!per1) {
-      Permission.bluetoothScan.request();
-    }
-    var per2 = await Permission.bluetoothConnect.isGranted;
-    if (!per2) {
-      Permission.bluetoothConnect.request();
-    }
+    // var per = await Permission.bluetooth.isGranted;
+    // if (!per) {
+    //   Permission.bluetooth.request();
+    // }
+    // var pers = await Permission.locationWhenInUse.isGranted;
+    // if (!pers) {
+    //   Permission.locationWhenInUse.request();
+    // }
+    // var per1 = await Permission.bluetoothScan.isGranted;
+    // if (!per1) {
+    //   Permission.bluetoothScan.request();
+    // }
+    // var per2 = await Permission.bluetoothConnect.isGranted;
+    // if (!per2) {
+    //   Permission.bluetoothConnect.request();
+    // }
 
     DjPrinter().init();
     DjPrinter().addDiscoveryListen(onReceive: (data) {
@@ -99,13 +99,14 @@ class _MyAppState extends State<MyApp> {
             ),
             ...devices
                 .map((e) => TextButton(
-                onPressed: () {
-                  [Permission.bluetoothConnect,].request().then((value) async {
-                    print("===============${value[Permission.bluetoothConnect]}");
-                    if(value[Permission.bluetoothConnect]!=PermissionStatus.denied){
-                      await DjPrinter().connect(e.address);
-                    }
-                  });
+                onPressed: ()async {
+                  // [Permission.bluetoothConnect,].request().then((value) async {
+                  //   print("===============${value[Permission.bluetoothConnect]}");
+                  //   if(value[Permission.bluetoothConnect]!=PermissionStatus.denied){
+                  //
+                  //   }
+                  // });
+                  await DjPrinter().connect(e.address);
                 //
 
                 },

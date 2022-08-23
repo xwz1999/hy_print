@@ -104,7 +104,8 @@ public class Bluetooth {
                 String name = remoteDevice.getName();
                 System.out.println(name);
                 System.out.println(remoteDevice.getAddress());
-                if (remoteDevice != null && name != null) {
+                System.out.println(remoteDevice.getBluetoothClass().getMajorDeviceClass());
+                if (remoteDevice != null && name != null&&remoteDevice.getBluetoothClass().getMajorDeviceClass()==1536) {
                     if (remoteDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
                         key = "{" + "\"name\":" + "\"" + name + "\"" + ","
                                 + "\"address\":" + "\"" + remoteDevice.getAddress() + "\"" + ","
