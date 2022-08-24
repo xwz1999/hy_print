@@ -168,26 +168,18 @@ public class PrintAsOrder {
             PrinterHelper.printAreaSize("0", "200", "200", "800", "1");
             //PrinterHelper.Encoding("gb2312");
             PrinterHelper.Box("0","10","575","790","3");
-
-
             PrinterHelper.Line("0", "160", "575", "160", "3");
             PrinterHelper.Line("0", "400", "575", "400", "3");
             PrinterHelper.Line("0", "560", "575", "560", "3");
             PrinterHelper.Line("380", "360", "540", "200", "3");
-                         PrinterHelper.Line("333", "160", "333", "400", "3");
+            PrinterHelper.Line("333", "160", "333", "400", "3");
 
-            PrinterHelper.SetBold("3");
-            PrinterHelper.SetMag("5","5");
+
+
             PrinterHelper.Align(PrinterHelper.CENTER);
-
-            //PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "0", "55", code);
-            PrinterHelper.PrintTextCPCL(PrinterHelper.TEXT,60,"0","55",code,1,false,0);
-
-//            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", "100", "0", code);
-//            PrinterHelper.Text(PrinterHelper.TEXT, "24", "0", "200", "0", code);
-
-
-
+            PrinterHelper.SetBold("4");
+            PrinterHelper.SetMag("5","5");
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "0", "55", code);
             closeBold();
             PrinterHelper.SetMag("1","1");
 
@@ -197,28 +189,38 @@ public class PrintAsOrder {
             PrinterHelper.SetBold("3");
             PrinterHelper.SetMag(cMultiple,cMultiple);
             PrinterHelper.Text(PrinterHelper.TEXT,cSize , "0",String.valueOf(cx), String.valueOf(cy), country);
-            PrinterHelper.Align(PrinterHelper.LEFT);
             if(!country1.isEmpty()){
                 PrinterHelper.Text(PrinterHelper.TEXT,cSize , "0",String.valueOf(cx1), String.valueOf(cy1), country1);
             }
-
             closeBold();
             PrinterHelper.SetMag("1","1");
 
+
+
+            PrinterHelper.Align(PrinterHelper.LEFT);
             PrinterHelper.SetBold("2");
-            PrinterHelper.SetMag("2.5","2.5");
-            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", "390", "210", num);
-
-            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", String.valueOf(500-sum.length()*10), String.valueOf(315), sum);
+            PrinterHelper.SetMag("3","3");
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "390", "210", num);
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", String.valueOf(500-sum.length()*10), String.valueOf(315), sum);
             closeBold();
             PrinterHelper.SetMag("1","1");
+
+
 
             PrinterHelper.Align(PrinterHelper.CENTER);
             printBarCode(barCode,"0","590");
 
 
+            PrinterHelper.Align(PrinterHelper.CENTER);
+            PrinterHelper.SetMag("2","2");
 
-//            PrinterHelper.SetBold("2");
+            PrinterHelper.Text(PrinterHelper.TEXT,"55" , "0","0", "730", barCode);
+
+            PrinterHelper.SetMag("1","1");
+
+
+
+            PrinterHelper.Align(PrinterHelper.CENTER);
             PrinterHelper.SetMag("2","2");
             PrinterHelper.Text(PrinterHelper.TEXT,"3" , "0","0", String.valueOf(channelY), channel);
 
@@ -227,6 +229,9 @@ public class PrintAsOrder {
             }
             closeBold();
             PrinterHelper.SetMag("1","1");
+
+
+
 
             PrinterHelper.Form();
             PrinterHelper.Print();
@@ -247,7 +252,7 @@ public class PrintAsOrder {
             width = "1";
         }
         try {
-            PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, width, "0", "130", x, y, true, "15", "15", "15", code);
+            PrinterHelper.Barcode(PrinterHelper.BARCODE, PrinterHelper.code128, width, "0", "130", x, y, false, "15", "15", "15", code);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,19 +274,18 @@ public class PrintAsOrder {
             PrinterHelper.Line("380", "360", "540", "200", "3");
             PrinterHelper.Line("333", "160", "333", "400", "3");
 
-            PrinterHelper.SetBold("3");
-            PrinterHelper.SetMag("5","5");
             PrinterHelper.Align(PrinterHelper.CENTER);
-            PrinterHelper.Text(PrinterHelper.TEXT, "1", "0", "0", "55", code);
+            PrinterHelper.SetBold("4");
+            PrinterHelper.SetMag("5","5");
 
 
-//            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", "100", "0", code);
-//            PrinterHelper.Text(PrinterHelper.TEXT, "24", "0", "200", "0", code);
-
-
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "0", "55", code);
 
             closeBold();
             PrinterHelper.SetMag("1","1");
+
+
+
 
 
 
@@ -294,16 +298,29 @@ public class PrintAsOrder {
             closeBold();
             PrinterHelper.SetMag("1","1");
 
-            PrinterHelper.SetBold("2");
-            PrinterHelper.SetMag("2.5","2.5");
-            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", "390", "210", num);
 
-            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", String.valueOf(500-sum.length()*10), String.valueOf(315), sum);
+
+            PrinterHelper.Align(PrinterHelper.LEFT);
+            PrinterHelper.SetBold("2");
+            PrinterHelper.SetMag("3","3");
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "390", "210", num);
+
+            PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", String.valueOf(500-sum.length()*10), String.valueOf(315), sum);
             closeBold();
             PrinterHelper.SetMag("1","1");
 
+
+
+
             PrinterHelper.Align(PrinterHelper.CENTER);
             printBarCode(barCode,"0","520");
+
+            PrinterHelper.Align(PrinterHelper.CENTER);
+            PrinterHelper.SetMag("2","2");
+
+            PrinterHelper.Text(PrinterHelper.TEXT,"55" , "0","0", "660", barCode);
+
+            PrinterHelper.SetMag("1","1");
 
 
 

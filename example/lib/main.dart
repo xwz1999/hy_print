@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:hy_printer/device.dart';
 import 'package:hy_printer/dj_printer.dart';
@@ -79,126 +79,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {return MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: const Text('Plugin example app'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(
-                onPressed: () {
-                  devices.clear();
-                  setState(() {});
-                  DjPrinter().startSearch;
-                },
-                child: const Text('扫描设备')),
-            // TextButton(onPressed: () {}, child: const Text('打印')),
-            const SizedBox(
-              height: 20,
-            ),
-            ...devices
-                .map((e) => TextButton(
-                onPressed: ()async {
-                  // [Permission.bluetoothConnect,].request().then((value) async {
-                  //   print("===============${value[Permission.bluetoothConnect]}");
-                  //   if(value[Permission.bluetoothConnect]!=PermissionStatus.denied){
-                  //
-                  //   }
-                  // });
-                  await DjPrinter().connect(e.address);
-                //
+    title: '安速货运',
+    builder: (context, widget) {
+      // ScreenUtil.setContext(context);
+      return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: BotToastInit().call(context, widget));
+    },
+    navigatorObservers: [BotToastNavigatorObserver()],
+    home: const ScanPage()
 
-                },
-                child: Column(
-                  children: [
-                    Text(e.name),
-                    Text(e.address),
-                  ],
-                )))
-                .toList(),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-                onPressed: () {
-
-                  // DjPrinter().printNewAScode(
-                  //   code: 'ASSZ000000002',
-                  //   barCode: 'ASSZ0000000020001',
-                  //   channel: '加拿大温哥华海派快线-',
-                  //   country: '美国',
-                  //   num: '2',
-                  //   sum:'9',
-                  //   offset: 0,
-                  //   hasPlan: true, );
-
-                  DjPrinter().printNewAScode(
-                    code: 'ASSZ000000002',
-                    barCode: 'ASSZ0000000020001',
-                    channel: '加拿大温哥华海派快线-卡派 / UPS派送',
-                    country: '美国啊啊',
-                    num: '2',
-                    sum:'999',
-                    offset: 0,
-                    hasPlan: true, );
-                  // DjPrinter().printNewAScode(
-                  //   code: 'ASSZ000000002',
-                  //   barCode: 'ASSZ0000000020001',
-                  //   channel: '加拿大温哥华海派快线-卡派 / UPS派送',
-                  //   country: '捷克斯洛伐克',
-                  //   num: '2',
-                  //   sum:'99',
-                  //   offset: 0,
-                  //   hasPlan: true, );
-                },
-                child: const Text('打印')),
-            TextButton(
-                onPressed: () {
-
-                  // DjPrinter().printNewAScode(
-                  //   code: 'ASSZ000000002',
-                  //   barCode: 'ASSZ0000000020001',
-                  //   channel: '加拿大温哥华海派快线-',
-                  //   country: '美国',
-                  //   num: '2',
-                  //   sum:'9',
-                  //   offset: 0,
-                  //   hasPlan: true, );
-
-                  DjPrinter().printNewAScode(
-                    code: 'ASSZ000000002',
-                    barCode: 'ASSZ0000000020001',
-                    channel: '加拿大温哥华海派快线-卡派 / UPS派送',
-                    country: '美国啊啊',
-                    num: '2',
-                    sum:'999',
-                    offset: 0,
-                    hasPlan: false, );
-                  // DjPrinter().printNewAScode(
-                  //   code: 'ASSZ000000002',
-                  //   barCode: 'ASSZ0000000020001',
-                  //   channel: '加拿大温哥华海派快线-卡派 / UPS派送',
-                  //   country: '捷克斯洛伐克',
-                  //   num: '2',
-                  //   sum:'99',
-                  //   offset: 0,
-                  //   hasPlan: true, );
-                },
-                child: const Text('noplan打印')),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-                onPressed: () {
-                  DjPrinter().disposeConnect();
-                },
-                child: const Text('取消链接')),
-
-          ],
-        ),
-      ),
-    ),
   );
   }
 }

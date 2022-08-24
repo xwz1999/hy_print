@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import cpcl.PrinterHelper;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
@@ -65,7 +66,7 @@ public class HyPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         if (call.method.equals("startSearch")) {
             bluetooth.SearchingBTDevice();
         } else if (call.method.equals("connect")) {
-            int code = -4;
+            int code;
             String arg = call.argument("address");
             System.out.println(arg);
             try {
@@ -104,9 +105,19 @@ public class HyPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             }
             result.success(sta);
         } else if (call.method.equals("disposeDiscovery")) {
+            try {
+                PrinterHelper.portClose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             bluetooth.cancelDiscoveryResult(context);
             result.success(true);
         } else if (call.method.equals("disposeConnect")) {
+            try {
+                PrinterHelper.portClose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             bluetooth.ExcuteDisconnect(context);
             result.success(true);
         }

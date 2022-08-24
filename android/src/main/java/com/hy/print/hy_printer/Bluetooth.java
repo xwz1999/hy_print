@@ -172,7 +172,8 @@ public class Bluetooth {
 
     public int btConn(final String address, Context context) throws Exception {
 //        bluetoothPort.connect(address);
-        final int[] portOpen = {-4};
+        //final int[] portOpen = {};
+        final int[] portOpen = new int[1];
         btThread = new Thread(new Runnable() {
 
             @Override
@@ -307,6 +308,7 @@ public class Bluetooth {
 
     public void ExcuteDisconnect(Context context) {
         new ExcuteDisconnectBT().execute(context);
+
     }
 
     private class ExcuteDisconnectBT extends AsyncTask<Context, Void, Void> {
