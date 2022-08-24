@@ -166,6 +166,7 @@ public class PrintAsOrder {
 
         try {
             PrinterHelper.printAreaSize("0", "200", "200", "800", "1");
+            //PrinterHelper.Encoding("gb2312");
             PrinterHelper.Box("0","10","575","790","3");
 
 
@@ -173,13 +174,14 @@ public class PrintAsOrder {
             PrinterHelper.Line("0", "400", "575", "400", "3");
             PrinterHelper.Line("0", "560", "575", "560", "3");
             PrinterHelper.Line("380", "360", "540", "200", "3");
-            PrinterHelper.Line("333", "160", "333", "400", "3");
+                         PrinterHelper.Line("333", "160", "333", "400", "3");
 
             PrinterHelper.SetBold("3");
             PrinterHelper.SetMag("5","5");
             PrinterHelper.Align(PrinterHelper.CENTER);
-            PrinterHelper.Text(PrinterHelper.TEXT, "1", "0", "0", "55", code);
 
+            //PrinterHelper.Text(PrinterHelper.TEXT, "55", "0", "0", "55", code);
+            PrinterHelper.PrintTextCPCL(PrinterHelper.TEXT,60,"0","55",code,1,false,0);
 
 //            PrinterHelper.Text(PrinterHelper.TEXT, "50", "0", "100", "0", code);
 //            PrinterHelper.Text(PrinterHelper.TEXT, "24", "0", "200", "0", code);
