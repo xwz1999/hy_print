@@ -69,6 +69,7 @@ class _ScanPageState extends State<ScanPage> {
     }, onDisconnect: () {
       print('disconnected');
     });
+    print('jieshu');
   }
 
 
@@ -77,8 +78,9 @@ class _ScanPageState extends State<ScanPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('设备列表'),
+        title: const Text('设备列表',style: TextStyle(color: Colors.white),),
       ),
       body: Center(
         child: Column(
@@ -101,19 +103,8 @@ class _ScanPageState extends State<ScanPage> {
             ...devices
                 .map((e) => TextButton(
                 onPressed: ()async {
-                  BotToast.showLoading(wrapToastAnimation: (controller, func, child) {
-                    return discoveryLoadingWidget();
-                  });
-                  
-                  
-                 int? value =  await DjPrinter().connect(e.address);
-                  Future.delayed(Duration(seconds: 3), () async {
-                    if(value==0){
-                      BotToast.closeAllLoading();
-                    }else{
-                      BotToast.closeAllLoading();
-                    }
-                  });
+
+                 await DjPrinter().connect(e.address);
 
 
                 },

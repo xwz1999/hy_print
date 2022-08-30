@@ -164,16 +164,17 @@ public class Bluetooth {
 
     //搜索设备
     public void SearchingBTDevice() {
+
         new CheckTypesTask().execute();
         System.out.println("开始搜索");
 
     }
 
 
-    public int btConn(final String address, Context context) throws Exception {
-//        bluetoothPort.connect(address);
-        //final int[] portOpen = {};
-        final int[] portOpen = new int[1];
+    public void btConn(final String address, Context context) throws Exception {
+
+        System.out.println("btConn");
+
         btThread = new Thread(new Runnable() {
 
             @Override
@@ -181,9 +182,11 @@ public class Bluetooth {
                 // TODO Auto-generated method stub
                 try {
                     System.out.println(address);
-                    portOpen[0] = PrinterHelper.portOpenBT(context,address);
-                    PrinterHelper.logcat("portOpen:"+ portOpen[0]);
-                    System.out.println(portOpen[0]);
+                    final int result =  PrinterHelper.portOpenBT(context,address);
+                    PrinterHelper.logcat("portOpen result:"+ result);
+                    System.out.println(result);
+
+
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -193,8 +196,6 @@ public class Bluetooth {
         btThread.start();
         //final int result = PrinterHelper.portOpenBT(context,address);
         //new connBT().execute(address);
-
-        return portOpen[0];
     }
 
     //断开连接
@@ -202,9 +203,15 @@ public class Bluetooth {
         try {
            // bluetoothPort.disconnect();
             PrinterHelper.portClose();
-            if ((btThread != null) && (btThread.isAlive()))
-                btThread.interrupt();
-
+//            if ((btThread != null) && (btThread.isAlive()))
+//                btThread.interrupt();
+            if ((btThread != null) && (btThread.isAlive())) {
+                Thread dummy = btThread;
+                btThread = null;
+                dummy.interrupt();
+            }else{
+               return;
+            }
             disconnectflags = true;
             context.unregisterReceiver(connectDevice);
 
@@ -271,53 +278,45 @@ public class Bluetooth {
 
 
 
-    class connBT extends AsyncTask<String, Void, Integer> {
-
-
-        @Override
-        protected Integer doInBackground(String... strings) {
-            Integer retVal = null;
-
-            //bluetoothPort.connect(strings[0]);
-
-            retVal = Integer.valueOf(0);
-
-            return retVal;
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            if (result.intValue() == 0)    // Connection success.
-            {
-//                RequestHandler rh = new RequestHandler();
-//                btThread = new Thread(rh);
-//                btThread.start();
-            } else    // Connection failed.
-            {
-
-            }
-            super.onPostExecute(result);
-        }
-    }
+//    class connBT extends AsyncTask<String, Void, Integer> {
+//
+//
+//        @Override
+//        protected Integer doInBackground(String... strings) {
+//            Integer retVal = null;
+//
+//            //bluetoothPort.connect(strings[0]);
+//
+//            retVal = Integer.valueOf(0);
+//
+//            return retVal;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Integer result) {
+//            if (result.intValue() == 0)    // Connection success.
+//            {
+////                RequestHandler rh = new RequestHandler();
+////                btThread = new Thread(rh);
+////                btThread.start();
+//            } else    // Connection failed.
+//            {
+//
+//            }
+//            super.onPostExecute(result);
+//        }
+//    }
 
     public void ExcuteDisconnect(Context context) {
-        new ExcuteDisconnectBT().execute(context);
-
-    }
-
-    private class ExcuteDisconnectBT extends AsyncTask<Context, Void, Void> {
-
-
-        @Override
-        protected Void doInBackground(Context... contexts) {
+//        new ExcuteDisconnectBT().execute(context);
             try {
-                DisconnectDevice(contexts[0]);
+                DisconnectDevice(context);
 
                 while (true) {
                     if (disconnectflags)
@@ -329,24 +328,45 @@ public class Bluetooth {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            return null;
-        }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        ;
-
-
-        @Override
-        protected void onPostExecute(Void result) {
-            disconnectflags = false;
-            super.onPostExecute(result);
-        }
-
-        ;
     }
+
+//    private class ExcuteDisconnectBT extends AsyncTask<Context, Void, Void> {
+//
+//
+//        @Override
+//        protected Void doInBackground(Context... contexts) {
+//            try {
+//                DisconnectDevice(contexts[0]);
+//
+//                while (true) {
+//                    if (disconnectflags)
+//                        break;
+//
+//                    Thread.sleep(100);
+//                }
+//            } catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        ;
+//
+//
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            disconnectflags = false;
+//            super.onPostExecute(result);
+//        }
+//
+//        ;
+//    }
 
 }

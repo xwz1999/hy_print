@@ -78,14 +78,10 @@ class DjPrinter {
 
   bool get hasInit => _hasInit;
 
-  Future<int?> connect(String address) async {
+  Future<bool?> connect(String address) async {
 
-    await Future.delayed(const Duration(milliseconds: 2000), () async {
-      var res = await _channel.invokeMethod('connect', {'address': address});
-      print('connect');
-      print(res);
+    final res = await _channel.invokeMethod('connect', {'address': address});
       return res;
-    });
   }
 
   void disposeDiscovery() {
